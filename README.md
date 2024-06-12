@@ -17,7 +17,7 @@ npm i -g typescript
 ## Para proyectos en desarrollo una instalacion en local en el proyecto
 
 ### Dentro del proyecto:
-### Creacion e instalacion de nodemodules y package json
+### Creacion  package json
 
 ```sh
 npm init -y
