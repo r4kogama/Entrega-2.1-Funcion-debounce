@@ -1,9 +1,17 @@
 import { expect, jest, test, describe, beforeEach } from '@jest/globals';
+import { debounce } from '../src/index';
 
 
-describe('testing ', () => {
+
+ describe('testing ', () => {
   test('',()=>{
-    expect(2 + 2).toBe(4);
+    //crear funcion de prueba con cualquier variable
+    //pasa esta funcion  al metodo debounce que actuara como callback en la funcion
+    jest.useFakeTimers({});
+    jest.advanceTimersByTime(variable)
+    //el retorno de debounce guardala en una variable
+    //comprobar el tiempo, cuantas veces se ha pasado, etc...
+
   });
 
-  })
+  }) 
