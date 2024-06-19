@@ -8,7 +8,7 @@
 npm install -g npm@latest
 ```
 
-### Install typescript global [opcional]
+### Instalar typescript global [opcional]
 
 ```sh
 npm i -g typescript
@@ -35,7 +35,7 @@ npm i --save-dev typescript
 npx tsc --init 
 ```
 
-### installar los tipos de node si no lo tiene
+### instalar los tipos de node si no lo tiene
 
 ```sh
 npm install --save-dev @types/node
@@ -59,17 +59,33 @@ npm install jest -D (desarrollo)
 npm install --save-dev ts-jest
 ```
 
-### intallar tipos de jest para ts
+### instalar tipos de jest para ts
 
 ```sh
 npm i -D @types/jest ts-jest  
 ```
 
-### instllar globals de jest
+### instalar globals de jest
 
 ```sh
 npm install --save-dev @jest/globals
 ```
+
+### Si en tu enviorement vas utilizar el DOM, node.js no lo admite, debes instalar el JSDOM (opcional)
+```sh
+// En la parte superior de tu archivo de test (spec file):
+/** @jest-environment jsdom */
+
+npm install jsdom --save-dev
+
+```
+
+### El paquete enviorement jsdom si no esta incluido en Jest hay que instalarlo
+```sh
+npm install -D jest-environment-jsdom
+
+```
+
 ### En el package.json:
 
 ```sh

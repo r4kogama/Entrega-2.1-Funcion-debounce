@@ -4,31 +4,34 @@
 // Esta logica de programacion ayuda de manera visual  a ver el funcionamiento del debounce en un evento click
 
 const debounceVisualTest = (callbackClick : Function, delay: number, contentAction: HTMLDivElement | null) =>{
-    let timeOut:  NodeJS.Timeout | number ;
+    let timeOutId:  NodeJS.Timeout | null = null ;
     let noEmit: boolean = false;
     let cont: number = 0;
     return  (...args : unknown[] ) => {
-      clearTimeout(timeOut);
+      console.log('variableID: '+ timeOutId)
+      if(timeOutId !== null){//cancela si no es null
+        clearTimeout(timeOutId);
+      }
       ++cont;
-      timeOut = setTimeout(() => {
+      timeOutId = setTimeout(() => {
         try{
           if(noEmit){ 
-            if(cont > 1){
-              contentAction!.innerHTML = "tu peticion ha sido debounceda, ni te molestes...";
-              }
             noEmit = false;
-            throw new Error ('el usuario ha clickado varias veces: '+cont );
+            if(cont > 1){
+              contentAction!.innerHTML = "tu peticion ha sido debounceda...";
+              throw new Error ('En la peticion debounceada el usuario ha clickado: '+cont+' veces' );
+            }
           }else{
             callbackClick(...args);
+            noEmit = true;
             if(cont <= 1){
               contentAction!.innerHTML = "Ha hecho click correctamente.. action emitida";
+              throw new Error ('El usuario a clickado!... y se le ha contado: '+cont );
             }
-            noEmit = true;
-            throw new Error ('El usuario a clickado!... y se le ha contado: '+cont );
           }
         }catch(error: unknown){
           console.log(error);
-          cont = 0;
+           cont = 0;
         } 
       }, delay);
     };

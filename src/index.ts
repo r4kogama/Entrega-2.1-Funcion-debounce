@@ -1,11 +1,15 @@
 
+type restParam = {
 
+}
 
-export const debounce = (callbackClick : Function, delay: number) =>{
-  let timeOut:  NodeJS.Timeout | number ;
+export const debounce = <T>(callbackClick : (...args : unknown[]) => T , delay: number) =>{
+  let timeOutId: NodeJS.Timeout| null  = null ;
   return  (...args : unknown[] ) => {
-    clearTimeout(timeOut);
-    timeOut = setTimeout(() => {
+    if(timeOutId !== null){
+      clearTimeout(timeOutId);
+    }
+    timeOutId = setTimeout(() => {
       callbackClick(...args);
     }, delay);
   };
