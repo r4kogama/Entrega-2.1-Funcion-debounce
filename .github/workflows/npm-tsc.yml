@@ -1,4 +1,4 @@
-name: ToDo actions
+name: Debounce actions
 
 on:
   push:
