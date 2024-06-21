@@ -2,13 +2,13 @@
 
 # Comandos de instalacion de TS y Jest
 
-### Si se quiere instalar en global ejecutar estos scripts, la instalacion de npm es mejor en global con esto instalas ultima version npm 
+### Si se quiere instalar en global ejecutar estos scripts, la instalacion de npm es mejor en global con esto se instala ultima version npm 
 
 ```sh
 npm install -g npm@latest
 ```
 
-### Instalar typescript global [opcional]
+### Instalacion typescript global [opcional]
 
 ```sh
 npm i -g typescript
@@ -29,13 +29,13 @@ npm init -y
 npm i --save-dev typescript
 ```
 
-### instalar biblioteca TS [tsconfig.json]
+### Instalacion biblioteca TS [tsconfig.json]
 
 ```sh
 npx tsc --init 
 ```
 
-### instalar los tipos de node si no lo tiene
+### Instalacion de los tipos de node si no lo tiene
 
 ```sh
 npm install --save-dev @types/node
@@ -47,7 +47,8 @@ npm install --save-dev @types/node
 
  "scripts":{
 	"run:<nombrefichero ts>: "ts-node-<nombrefichero ts> .ts",
-	"tsc": "tsc"
+	"tsc": "tsc",
+  "test": "jest"
 }
 
 ```
@@ -59,19 +60,20 @@ npm install jest -D (desarrollo)
 npm install --save-dev ts-jest
 ```
 
-### instalar tipos de jest para ts
+### Instalacion tipos de jest para ts
 
 ```sh
 npm i -D @types/jest ts-jest  
 ```
 
-### instalar globals de jest
+### Instalacion globals de jest
 
 ```sh
 npm install --save-dev @jest/globals
 ```
 
-### Si en tu enviorement vas utilizar el DOM, node.js no lo admite, debes instalar el JSDOM (opcional)
+***(Opcional)***
+### Si en el enviorement de desarrollo se manipula el DOM, ya que node.js no lo admite, se debe instalar el JSDOM 
 ```sh
 // En la parte superior de tu archivo de test (spec file):
 /** @jest-environment jsdom */
@@ -80,13 +82,13 @@ npm install jsdom --save-dev
 
 ```
 
-### El paquete enviorement jsdom si no esta incluido en Jest hay que instalarlo
+### El paquete enviorement jsdom si no esta incluido en la version de Jest se debe de instalar
 ```sh
 npm install -D jest-environment-jsdom
 
 ```
 
-### En el package.json:
+### En package.json:
 
 ```sh
 
@@ -104,7 +106,7 @@ npm install -D jest-environment-jsdom
   }
 
 ```
-### Executar lost test 
+### Execucion de tests
 
 ```sh
 npm run test

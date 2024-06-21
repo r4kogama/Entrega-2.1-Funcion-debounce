@@ -1,21 +1,22 @@
 /** @jest-environment jsdom */
 import { expect, jest, test, describe, beforeEach, it } from '@jest/globals';
 import { debounce } from '../src/index';
-import { Mock } from 'jest-mock';
 import { afterEach } from 'node:test';
+import { Jest } from '@jest/environment';
 
 
 
- describe('Testing debounce', () => {
-   let fnCallback: (...args: unknown[]) => void;
-   let time: any;
-   let resultDebounce: (...args: unknown[]) => void;
+ describe('Testing debounce: limitar la cantidad de veces que se ejecuta una accion', () => {
+   type Arguments = (...args : any[]) => void;
+   let fnCallback: Arguments;
+   let time: Jest;
+   let resultDebounce: Arguments;
    let clearTimeId:NodeJS.Timeout | null;
     //limpiar temporizadores o variables 
     //crear funcion de prueba con cualquier variable
    beforeEach( () =>{ 
     //crear funcion con metodo .fn
-    fnCallback = jest.fn(() => { console.log('done!')})
+    fnCallback = jest.fn();
     //la funcion  pasa metodo debounce que actuara como callback 
     resultDebounce = debounce(fnCallback, 1000);
     //el retorno de debounce es guardado en una variable
@@ -28,30 +29,40 @@ import { afterEach } from 'node:test';
     jest.clearAllTimers();
   })
   
-    it('Llamar a la funcion debounce varias veces, dando como resultado almenos una ejecucion independiente de las veces', () =>{
+    it('Varias llamadas simultaneas, como resultado ninguna ejecucion', () =>{
       resultDebounce();
       resultDebounce();
       resultDebounce();
-      time.runOnlyPendingTimers()//en tareas asincronas ejecutando los pedientes
-      expect(fnCallback).toHaveBeenCalled();
+      expect(fnCallback).toHaveBeenCalledTimes(0);
     })
   
-    it('Llama a la fn debounce, se incrementa el retardo o inactividad y recibe una respuesta',()=>{
+    it('varias llamadas simultaneas, se incrementa el retardo o inactividad y como resultado se ejecuta 1 vez',()=>{
+      resultDebounce();
       resultDebounce();
       time.advanceTimersByTime(1500);
+      resultDebounce();
+      expect(fnCallback).toHaveBeenCalled();
       expect(fnCallback).toHaveBeenCalledTimes(1);
     });
+
+    it('Se disminuye el tiempo de retardo o inactividad desde la ultima llamada, como resultado nunca se ejecuta',()=>{
+      resultDebounce();
+      time.advanceTimersByTime(100);
+      resultDebounce();
+      expect(fnCallback).toHaveBeenCalledTimes(0);
+    });
     
-    it('Llama a la fn debounce, se incrementa el periodo de inactividad o retardo, pero se ejecutara  una vez', () =>{
+    it('Varias llamadas con un tiempo de retraso incrementado entre ellas, como resultado se ejecuta 2 vez', () =>{
       resultDebounce();
       time.advanceTimersByTime(2000);
+      expect(fnCallback).toHaveBeenCalled();
       resultDebounce();
-      time.advanceTimersByTime(500);
-      expect(fnCallback).toHaveBeenCalledTimes(1)
+      time.advanceTimersByTime(2000);
+      expect(fnCallback).toHaveBeenCalledTimes(2);
     })
 
 
-    it('Se cancela la llamada al debounce si se llama varias veces, dando como resultado una vez de ejecucion real', () =>{
+    it('Se cancela la llamada al debounce si se llama varias veces, dando como resultado ninguna ejecucion real', () =>{
       resultDebounce();
       resultDebounce();
       resultDebounce();
@@ -69,7 +80,8 @@ import { afterEach } from 'node:test';
       if(clearTimeId !== null){
         time.clearAllTimers();
       }
-      time.advanceTimersByTime(2000);
+      time.runOnlyPendingTimers()
+      expect(fnCallback).toHaveBeenCalled();
       resultDebounce();
       expect(fnCallback).toHaveBeenCalledTimes(1)
     })

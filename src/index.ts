@@ -1,11 +1,9 @@
 
-type restParam = {
+type Args = (...args : any[]) => void;
 
-}
-
-export const debounce = <T>(callbackClick : (...args : unknown[]) => T , delay: number) =>{
-  let timeOutId: NodeJS.Timeout| null  = null ;
-  return  (...args : unknown[] ) => {
+export const debounce = <T>(callbackClick : Args , delay: number): ((...args: Parameters<Args>) => void) =>{
+  let timeOutId: NodeJS.Timeout | null = null ;
+  return  (...args : Parameters<Args>) => {
     if(timeOutId !== null){
       clearTimeout(timeOutId);
     }
