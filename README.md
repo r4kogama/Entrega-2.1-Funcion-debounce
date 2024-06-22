@@ -1,4 +1,6 @@
 # Entrega-2.1-Funcion-debounce
+### Git pages
+#### [Go to link web](https://r4kogama.github.io/Entrega-2.2-Funci-throttle/)
 
 ### Comandos de instalacion
 
@@ -7,7 +9,6 @@
 ```sh
 npm install 
 ```
-
 
 ***(Opcional)***
 ### En cuanto los test, si en el enviorement de desarrollo se manipula el DOM, ya que node.js no lo admite, se debe instalar el JSDOM 
@@ -31,7 +32,7 @@ npm install -D jest-environment-jsdom
 npm run test
 ```
 
-### Live Server web
+### Live Server web 
 
 #### El proyecto esta disponible en web para abrirlo se necesita un ***(live server)*** en el editor de texto o IDE.
 
