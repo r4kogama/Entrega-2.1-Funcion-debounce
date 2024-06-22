@@ -1,6 +1,6 @@
 # Entrega-2.1-Funcion-debounce
 ### Git pages
-#### [Go to link web](https://r4kogama.github.io/Entrega-2.2-Funci-throttle/)
+#### [Go to link web](https://r4kogama.github.io/Entrega-2.1-Funcion-debounce/)
 
 ### Comandos de instalacion
 
