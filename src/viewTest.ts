@@ -1,14 +1,14 @@
 
-type Args = (...args : any[]) => any;
+type Args <T extends any[]> = (...args : T) => void;
 
 //TEST BEBOUNCE PRUEBAS DE FUNCIONAMIENTO
 // Esta logica de programacion ayuda de manera visual  a ver el funcionamiento del debounce en un evento click
 
-const debounceVisualTest = (callbackClick : Args, delay: number, contentAction: HTMLDivElement | null):  ((...args: Parameters<Args>) => void) =>{
+const debounceVisualTest = <T extends any[]>(callbackClick : Args<T>, delay: number, contentAction: HTMLDivElement | null): Args<T> =>{
     let timeOutId:  NodeJS.Timeout | null = null ;
     let noEmit: boolean = false;
     let cont: number = 0;
-    return  (...args : Parameters<Args> ) => {
+    return  (...args : T ) => {
       console.log('variableID: '+ timeOutId)
       if(timeOutId !== null){//cancela si no es null
         clearTimeout(timeOutId);

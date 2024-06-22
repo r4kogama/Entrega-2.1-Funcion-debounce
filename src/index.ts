@@ -1,9 +1,9 @@
 
-type Args = (...args : any[]) => void;
+type Args <T extends any[]> = (...args : T) => void;
 
-export const debounce = <T>(callbackClick : Args , delay: number): ((...args: Parameters<Args>) => void) =>{
+export const debounce = <T extends any[]>(callbackClick : Args<T> , delay: number): Args<T> =>{
   let timeOutId: NodeJS.Timeout | null = null ;
-  return  (...args : Parameters<Args>) => {
+  return  (...args : T) => {
     if(timeOutId !== null){
       clearTimeout(timeOutId);
     }
